@@ -1,0 +1,111 @@
+﻿@model List<Card>
+
+<style type="text/css">
+
+    .card-container{
+       
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        margin-top:30px;
+    }
+
+    @@media(max-width:500px){
+        .header-image{
+            width:390px;
+            height:270px;}
+
+        .card-thumbnail{
+            width:250px;
+            height:187px;
+            }
+
+        .my-card{
+            width:250px;
+            height:270px;
+            }
+
+    }
+
+    @@media(min-width:501px){
+        .header-image{
+            width:700px;
+            height:495px;}
+
+        .card-thumbnail{
+            width:250px;
+            height:187px;
+            }
+
+        .my-card{
+            width:250px;
+            height:270px;
+            }
+
+    }
+    
+     @@media(min-width:1001px){
+         .header-image{
+            width:800px;
+            height:565px;}
+
+          .card-thumbnail{
+            width:250px;
+            height:187px;
+            }
+
+            .my-card{
+            width:250px;
+            height:270px;
+            }
+     }
+    
+</style>
+
+
+
+<container fluid >
+    @if (@ViewBag.MenuItemHeaderImage != null && @ViewBag.MenuItemDescriptionTitle != null && @ViewBag.MenuItemDescription!=null)
+    {
+         <div class="d-flex justify-content-center align-items-center ">
+            <img class="header-image " src="~/images/@ViewBag.MenuItemHeaderImage"/>
+        </div>
+        <div class="card text-center p-3">
+              
+              <div class="card-body ">
+                    <h5 class="card-title">@ViewBag.MenuItemDescriptionTitle</h5>
+                    <p class="card-text">@ViewBag.MenuItemDescription</p>
+                
+              </div>
+              
+        </div>
+    }
+    
+</container>
+
+  <div class="container card-container ">
+    <div class="row">
+        
+                @foreach (var card in Model){
+                       <div class="col-lg-3 col-md-4 col-sm-6 col mb-4  d-flex justify-content-center align-items-center">
+                         <div class="card my-card">
+                              <img src="~/images/@card.ThumbnailImage" alt="" class="card-img-top card-thumbnail">
+                                  <div class="card-body text-center">
+                                       <h5 >@card.Name</h5>
+                                       <div class="p-2">
+                                            <a asp-controller="Card" asp-action="CardDetails" asp-route-id="@card.Id" >Detalii</a>
+                                       </div>
+                                  </div>
+                         </div>
+                      </div>
+                }
+        
+    </div>
+   </div>  
+    
+      
+    
+    
+   
+
+

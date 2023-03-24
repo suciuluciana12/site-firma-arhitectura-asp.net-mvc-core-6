@@ -1,0 +1,97 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+ <style type="text/css">
+       @@media (max-width:500px){
+            .logo{
+             width:120px;
+             height:120px;
+             margin-left:10px;
+            }
+            .Cipri-image{
+            width:120px;
+             height:120px;
+             margin-right:10px;
+            }
+            .header-paragraph-big-screen{
+                display:none;
+            }
+            .antet{
+                display:flex;
+                align-items:center;
+            }
+            .home-picture{
+                width:400px;
+               height:348px;
+            }
+        }  
+        @@media(min-width:501px; max-width:1000px){
+             .logo{
+                width:200px;
+                height:200px;
+            }
+
+            .home-picture{
+                 width:500px;
+                height:435px;
+            }
+            .antet{
+                display:flex;
+                align-items:center;
+            }
+             .header-paragraph-big-screen{
+                display:none;
+            }
+            .Cipri-image{
+              width:200px;
+             height:200px;
+            }
+         }
+
+          @@media(min-width:1001px){
+             .logo{
+                width:250px;
+                height:250px;
+            }
+
+            .home-picture{
+                 width:1000px;
+                height:870px;
+            }
+            .antet{
+                display:flex;
+                align-items:center;
+            }
+
+            .header-paragraph-small-screen{
+                display:none;
+            }
+            .Cipri-image{
+             width:250px;
+             height:250px;
+            }
+         }
+    </style>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+         <div class="antet mt-4 text-center">
+              <div><img src="~/images/basc-logo.jpg" class="logo"/></div>
+              <div>
+                      <h3 class="text-center p-1"> Birou de arhitectură Șimon Ciprian</h3>
+                      <div class="header-paragraph-big-screen p-2">
+                          <p>Cred că arhitectura și urbanismul vor avea mereu la bază cele trei vechi principii,utilitate, trăinicie și frumusețe.</p>
+                          <p>Ponderea lor, în măsuri variabile, este rezultatul colaborării dintre arhitect, beneficiar și comunitatea în care trăiesc.</p>
+                          <p>Toată munca arhitectului trebuie îndreptată către găsirea echilibrului între util, trainic și frumos , pentru a ni se descoperi nouă tuturor, cât mai multe din bucuriile esențiale ale vieții. </p>
+                      </div>
+              </div>
+
+               <div><img src="~/images/poza-Cipri-header.jpg" class="Cipri-image"/></div>
+          </div>
+          <div class="header-paragraph-small-screen mt-5 p-2 text-center">
+                  <p>Cred că arhitectura și urbanismul vor avea mereu la bază cele trei vechi principii,utilitate, trăinicie și frumusețe.</p>
+                  <p>Ponderea lor, în măsuri variabile, este rezultatul colaborării dintre arhitect, beneficiar și comunitatea în care trăiesc.</p>
+                  <p>Toată munca arhitectului trebuie îndreptată către găsirea echilibrului între util, trainic și frumos , pentru a ni se descoperi nouă tuturor, cât mai multe din bucuriile esențiale ale vieții. </p>
+           </div>
+           <div class=" p-2 d-flex align-items-center justify-content-center">
+               <img src="~/images/home-picture.jpg" class="home-picture"/>
+           </div>
+     </div>

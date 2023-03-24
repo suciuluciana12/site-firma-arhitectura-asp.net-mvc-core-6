@@ -1,0 +1,16 @@
+﻿@page
+@model Image
+@{
+    Layout = null;
+}
+<abp-modal>
+    <abp-modal-header title="Product Information"></abp-modal-header>
+    <abp-modal-body>
+        
+        <div>
+            <img src="@Model.Src" />
+        </div>
+       
+    </abp-modal-body>
+    <abp-modal-footer buttons="Close"></abp-modal-footer>
+</abp-modal>

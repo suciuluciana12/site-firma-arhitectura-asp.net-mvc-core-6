@@ -1,0 +1,262 @@
+﻿@model List<Image>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - siteCipri</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+  
+
+   
+
+    <style type="text/css">
+        .card-image
+        {
+            padding:10px;
+            width:300px;
+            height:225px;
+        }
+        .card-image:hover{
+            transform:scale(1.02);
+        }
+
+        .card-container
+        {
+        background-color:#eeeeee;
+        margin-top:30px;
+        padding:50px;
+        }
+
+        .previousBtn{
+   
+            font-size:40px;
+            position:absolute;
+            top:50%;
+            transform:translateY(-50%);
+            left:10px;
+        }
+         .nextBtn{
+         
+            font-size:40px;
+             position:absolute;
+             top:50%;
+             right:10px;
+             transform:translateY(-50%);
+
+
+        }
+        #myImg {
+              border-radius: 5px;
+              cursor: pointer;
+              transition: 0.3s;
+            }
+
+            #myImg:hover {opacity: 0.7;}
+
+            /* The Modal (background) */
+            .modal {
+              display: none; /* Hidden by default */
+              position: fixed; /* Stay in place */
+              z-index: 1; /* Sit on top */
+              padding-top: 100px; /* Location of the box */
+              left: 0;
+              top: 0;
+              width: 100%; /* Full width */
+              height: 100%; /* Full height */
+              overflow: auto; /* Enable scroll if needed */
+              background-color: rgb(0,0,0); /* Fallback color */
+              background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+            }
+
+            /* Modal Content (Image) */
+            .modal-content {
+              margin: auto;
+              display: block;
+              width: 80%;
+              max-width: 700px;
+              position:relative;
+            }
+
+            /* Caption of Modal Image (Image Text) - Same Width as the Image */
+            #caption {
+              margin: auto;
+              display: block;
+              width: 80%;
+              max-width: 700px;
+              text-align: center;
+              color: #ccc;
+              padding: 10px 0;
+              height: 150px;
+            }
+
+            /* Add Animation - Zoom in the Modal */
+            .modal-content, #caption {
+              animation-name: zoom;
+              animation-duration: 0.6s;
+            }
+
+
+
+            /* The Close Button */
+            .close {
+              position: absolute;
+              top: 15px;
+              right: 35px;
+              color: #f1f1f1;
+              font-size: 40px;
+              font-weight: bold;
+              transition: 0.3s;
+            }
+
+            .close:hover,
+            .close:focus {
+              color: #bbb;
+              text-decoration: none;
+              cursor: pointer;
+            }
+            /* 100% Image Width on Smaller Screens */
+             @@media only screen and (max-width: 700px){
+              .modal-content {
+                width: 100%;
+              }}
+
+    </style>
+
+</head>
+<body>
+    
+@*-----k este nr de imagini----------*@
+    @{
+        var k = 0;
+    }
+    <div class="container card-container">
+        <div class="row  ">
+
+                @foreach (var image in Model)    
+                {
+                            k++;
+                            <div class="col-lg-3 col-md-4 col-sm-6 col mb-4  d-flex justify-content-center align-items-center" >                                        
+                                         <img class="card-image "  src="~/images/@image.Src" id="myImg-@k" alt=""/>
+                             </div>
+                            
+            }              
+                         
+           
+        </div>
+   </div>  
+   <input type="hidden" id="nrOfImages" value=@k></input>
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal ">
+
+      <!-- The Close Button -->
+      <span class="close">&times;</span>
+
+      <!-- Modal Content (The Image) -->
+      <div class="modal-content ">
+          <img  id="modalImage" alt="" style="width:100%;"/>
+          <div class="previousBtn" id="previousBtn"><i class="fa-solid fa-angles-left"></i></div>
+          <div class="nextBtn" id="nextBtn"><i class="fa-solid fa-angles-right"></i></div>
+      </div>
+         
+
+     
+
+      <!-- Modal Caption (Image Text) -->
+      <div id="caption"></div>
+</div>
+
+
+    @section Scripts{
+
+        <script>
+            var k=$("#nrOfImages").val();     
+           
+           
+
+            for ( i = 1; i<= k;i++)
+            {
+                // Get the modal
+                var modal = document.getElementById("myModal");
+
+                // Get the image and insert it inside the modal - use its "alt" text as a caption
+                var imgId="myImg-"+i;               
+                var img = document.getElementById(imgId);              
+                var modalImg = document.getElementById("modalImage");
+                var captionText = document.getElementById("caption");
+              
+
+                img.onclick = function(){
+                    modal.style.display = "block";
+                    modalImg.src = this.src;
+                    captionText.innerHTML = this.alt;
+                    imageId=this.id;
+                    for(j=1;j<=k;j++){
+                        id="myImg-"+j;
+                        if(imageId==id){
+                            imageNumber=j;
+                        }
+                    }
+                    console.log(imageNumber);                         
+                }                  
+                   
+            };
+
+                    var previousBtn=document.getElementById("previousBtn");
+                    previousBtn.onclick=function()
+                    {
+                        
+                         if(imageNumber!=1)
+                         {
+                               var previousImageNr=imageNumber-1;
+                               var previousImageId="myImg-"+previousImageNr;                                       
+                               var previousImage=document.getElementById(previousImageId);                               
+                               modalImg.src=previousImage.src;
+                               imageNumber=imageNumber-1;
+                         }
+                         else{
+                             var lastImageId="myImg-"+k;
+                             var lastImage=document.getElementById(lastImageId);
+                             modalImg.src=lastImage.src;
+                             imageNumber=k;
+                         }
+                    }
+
+                       var nextBtn=document.getElementById("nextBtn");
+                       nextBtn.onclick=function()
+                        {
+                             console.log(imageNumber); 
+                             if(imageNumber!=k)
+                             {
+                                   var nextImageNr=imageNumber+1;
+                                   var nextImageId="myImg-"+nextImageNr;                                       
+                                   var nextImage=document.getElementById(nextImageId);                               
+                                   modalImg.src=nextImage.src;
+                                   imageNumber=imageNumber+1;
+                             }
+                             else
+                              {
+                                 var firstImageId="myImg-"+1;
+                                 var firstImage=document.getElementById(firstImageId);
+                                 modalImg.src=firstImage.src;
+                                 imageNumber=1;
+                             }
+                        }
+           
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+        </script>
+    }
+
+ </body>
+ </html>
+
